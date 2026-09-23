@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外部ブラウザで開く</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0a;
+            --color-card: #1a1a1a;
+            --color-slate: #c0c0c0;
+            --color-light-slate: #e0e0e0;
+            --color-gold: #d4af37;
+            --font-sans: 'Noto Sans JP', sans-serif;
+            --font-display: 'Oswald', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-slate);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            font-size: 17px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: var(--color-card);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #222;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            color: var(--color-light-slate);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            color: var(--color-light-slate);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-gold);
+            color: #000;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 18px 50px;
+            border-radius: 8px;
+            transition: transform 0.3s, filter 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>外部ブラウザで開いてください</h1>
+        <p>Instagramアプリ内ブラウザでは、申し込みページが正常に動作しない可能性があります。<br>以下のボタンをクリックして、外部ブラウザ（SafariやChromeなど）で開いてお申し込みください。</p>
+        <button id="openExternalButton" class="cta-button">外部ブラウザで開く</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const externalUrl = 'https://script.google.com/macros/s/AKfycbzg-UTbk4trqPH1AS1wjNPWujuQxDpBn3mHHDzaX-w-1ZvS-vCV_Pln55r59o47mcMrNA/exec';
+            const openButton = document.getElementById('openExternalButton');
+
+            openButton.addEventListener('click', () => {
+                window.open(externalUrl, '_blank');
+            });
+
+            // Optional: Auto-redirect if not in Instagram in-app browser (or if it's a normal browser)
+            // This part is tricky as some in-app browsers might still block direct redirects.
+            // For now, we'll keep it manual to ensure the user sees the instruction.
+            // If you want to try auto-redirect for non-Instagram browsers:
+            /*
+            function isInstagramInAppBrowser() {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                return /Instagram/i.test(userAgent);
+            }
+            if (!isInstagramInAppBrowser()) {
+                window.location.href = externalUrl;
+            }
+            */
+        });
+    </script>
+</body>
+</html>
